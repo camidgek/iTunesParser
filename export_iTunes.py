@@ -4,21 +4,24 @@
 import os, shutil, xmlutil
 
 
-start_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\new\\";
-dest_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\old\\";
-# xmlfilename = "Throwbacks.xml";
-new_xml = xmlutil.XMLFile("NewPlaylist.xml",
-                          start_dir)
-if os.path.isfile(dest_dir + "OldPlaylist.xml"):
-    old_xml = xmlutil.XMLFile("OldPlaylist.xml",
-                              dest_dir)
-else:
-    xmlutil.addAll(new_xml,
-                   dest_dir)
-    shutil.copy("C:\\Users\\Kevin\\Desktop\\playlist\\new\\NewPlaylist.xml",
-                "C:\\Users\\Kevin\\Desktop\\playlist\\old\\OldPlaylist.xml")
+start_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\new\\"
+start_filename = "NewPlaylist.xml"
+dest_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\old\\"
 
 
-print(new_xml.getFilepathList())
-print("\n")
-print(new_xml.getFilepathList())
+
+new_xml = xmlutil.XMLFile(start_filename, start_dir)
+
+xmlutil.addFiles(new_xml, dest_dir)
+
+
+# if os.path.isfile(dest_dir + "OldPlaylist.xml"):
+#     old_xml = xmlutil.XMLFile("OldPlaylist.xml", dest_dir)
+# else:
+#     xmlutil.addAll(new_xml, dest_dir)
+#     shutil.copy(start_dir + "NewPlaylist.xml", dest_dir + "OldPlaylist.xml")
+
+
+# print(new_xml.getFilepathList())
+# print("\n")
+# print(new_xml.getFilepathList())

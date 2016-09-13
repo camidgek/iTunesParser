@@ -5,14 +5,16 @@ import shutil, os
 from xml.dom import minidom
 
 class XMLFile:
-    def __init__(self, filename, ddir):
-        self.filepath = ddir + filename
+    def __init__(self, filename, mydir):
+        self.myfilename = filename
+        self.mydir = mydir
+        self.myfilepath = mydir + filename
         self.mp3filepathlist = []
-        self.parseFile()
+        self.parseFileForLocations()
 
-    def parseFile(self):
+    def parseFileForLocations(self):
         # minidom.parse("filepath to xml file")
-        xmldoc = minidom.parse(self.filepath)
+        xmldoc = minidom.parse(self.myfilepath)
         plist = xmldoc.getElementsByTagName("plist")[0]
         dict1 = plist.getElementsByTagName("dict")[0]
         dict2 = dict1.getElementsByTagName("dict")[0]
@@ -49,6 +51,20 @@ def getAbsFilepathList(list):
 ####
 
 
+def addFiles(new_xml, dest_dir):
+    # If the folder doesn't contain an xml file, delete all files and copy over new files including xml
+    if not os.path.isfile(dest_dir + "OldPlaylist.xml"):
+        #deleteAll(dest_dir)
+        addAll(new_xml, dest_dir)
+        shutil.copy(new_xml.filepath, dest_dir + "OldPlaylist.xml")
+        print("All files have been copied to the desired location.")
+        return
+    else:
+        old_xml = XMLFile("OldPlaylist.xml", dest_dir)
+        print("Nothing happens")
+
+
+
 # Checks if $filepath is present in $xmldoc
 def isPresent(filepath, xmldoc):
     filepathlist = xmldoc.mp3filepathlist
@@ -75,7 +91,7 @@ def addNewFiles(old_xmldoc, new_xmldoc, dest):
     new_list = new_xmldoc.mp3filepathlist
     for path in new_list:
         if(path not in old_list):
-            shutil.copy(getAbsFilePath(path), dest)
+            shutil.copy(getAbsFilepath(path), dest)
     return 0
 
 
