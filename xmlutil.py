@@ -24,6 +24,7 @@ class XMLFile:
                 if (text == "Location"):
                     filepathfull = x.nextSibling.firstChild.data
                     filepath = filepathfull[17:]
+                    filepath = getAbsFilepath(filepath)
                     self.mp3filepathlist.append(filepath)
 
     def getFilepathList(self):
@@ -47,6 +48,7 @@ def getAbsFilepathList(list):
     return newlist
 ####
 
+
 # Checks if $filepath is present in $xmldoc
 def isPresent(filepath, xmldoc):
     filepathlist = xmldoc.mp3filepathlist
@@ -66,6 +68,7 @@ def deleteRemovedFiles(old_xmldoc, new_xmldoc, location):
             # remove new file location, not itunes location
             os.remove(path)
 
+
 # Adds files present in $new_xmldoc that are not present in $old_xmldoc
 def addNewFiles(old_xmldoc, new_xmldoc, dest):
     old_list = old_xmldoc.mp3filepathlist
@@ -74,6 +77,7 @@ def addNewFiles(old_xmldoc, new_xmldoc, dest):
         if(path not in old_list):
             shutil.copy(getAbsFilePath(path), dest)
     return 0
+
 
 # Adds all files from $xmldoc
 def addAll(xmldoc, dest):

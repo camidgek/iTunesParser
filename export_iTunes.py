@@ -18,7 +18,7 @@ else:
     shutil.copy("C:\\Users\\Kevin\\Desktop\\playlist\\new\\NewPlaylist.xml",
                 "C:\\Users\\Kevin\\Desktop\\playlist\\old\\OldPlaylist.xml")
 
-z = []
+
 print(new_xml.getFilepathList())
 print("\n")
-print(xmlutil.getAbsFilepathList(new_xml.getFilepathList()))
+print(new_xml.getFilepathList())
