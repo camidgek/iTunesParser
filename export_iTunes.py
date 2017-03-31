@@ -4,10 +4,9 @@
 import os, shutil, xmlutil
 
 
-start_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\new\\"
+start_dir = "\\playlist\\new\\"
 start_filename = "NewPlaylist.xml"
-dest_dir = "C:\\Users\\Kevin\\Desktop\\playlist\\old\\"
-
+dest_dir = "\\playlist\\old\\"
 
 
 new_xml = xmlutil.XMLFile(start_filename, start_dir)
